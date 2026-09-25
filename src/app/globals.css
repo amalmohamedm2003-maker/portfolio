@@ -2,23 +2,24 @@
 @plugin "@tailwindcss/typography";
 
 @theme {
-  --color-canvas: #0a0a0a;
-  --color-surface: #121212;
-  --color-card: #171717;
-  --color-border-subtle: #262626; /* Changed to standard kebab-case for Tailwind 4 */
-  --color-text-primary: #EDEDED;
-  --color-text-muted: #A1A1A1;
+  --color-canvas: #F9F9F8;
+  --color-surface: #FFFFFF;
+  --color-card: #FFFFFF;
+  --color-border-subtle: rgba(0, 0, 0, 0.1);
+  --color-text-primary: #242424;
+  --color-text-muted: #6B6B6B;
   --color-medium-green: #1A8917;
 
-  --font-serif: Merriweather, Georgia, serif;
-  --font-sans: Inter, -apple-system, sans-serif;
-  --font-mono: JetBrains Mono, monospace;
+  --font-serif: "GT Super", Georgia, Cambria, "Times New Roman", Times, serif;
+  --font-sans: sohne, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-mono: ui-monospace, Menlo, Monaco, "Cascadia Mono", "Segoe UI Mono", "Roboto Mono", "Oxygen Mono", "Ubuntu Monospace", "Source Code Pro", "Fira Mono", "Droid Sans Mono", "Courier New", monospace;
 }
 
 @layer base {
   body {
     background-color: var(--color-canvas);
     color: var(--color-text-primary);
+    -webkit-font-smoothing: antialiased;
   }
 }
 
@@ -27,24 +28,31 @@
     color: var(--color-text-primary);
   }
   .prose a {
-    color: #FFFFFF;
+    color: var(--color-text-primary);
     text-decoration: underline;
+    text-decoration-color: var(--color-border-subtle);
+    text-underline-offset: 4px;
   }
   .prose a:hover {
-    color: var(--color-medium-green);
+    color: var(--color-text-primary);
   }
-  .prose h1, .prose h2, .prose h3 {
-    color: #FFFFFF;
+  .prose h1, .prose h2, .prose h3, .prose h4 {
+    color: var(--color-text-primary);
     font-family: var(--font-serif);
+    font-weight: 700;
   }
   .prose code {
-    color: #E5E5E5;
-    background-color: #1E1E1E;
+    color: #C7254E;
+    background-color: #F9F2F4;
     padding: 2px 4px;
     border-radius: 4px;
   }
   .prose blockquote {
-    border-left-color: var(--color-border-subtle);
-    color: var(--color-text-muted);
+    border-left-color: var(--color-text-primary);
+    color: var(--color-text-primary);
+    font-style: italic;
+  }
+  .prose img {
+    border-radius: 4px;
   }
 }

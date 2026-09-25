@@ -1,8 +1,6 @@
 import { getAllPosts } from '@/lib/mdx';
 import { notFound } from 'next/navigation';
 import MotionContainer from '@/components/MotionContainer';
-import Link from 'next/link';
-import { ArrowLeft } from 'lucide-react';
 import { MDXRemote } from 'next-mdx-remote/rsc';
 
 export async function generateStaticParams() {
@@ -18,27 +16,36 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
 
   return (
     <MotionContainer>
-      <Link href="/blog" className="inline-flex items-center text-xs font-mono text-text-muted hover:text-white mb-8">
-        <ArrowLeft className="w-3.5 h-3.5 mr-1" /> Back to Articles
-      </Link>
+      <article>
+        <header className="mb-10">
+          <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl font-bold text-text-primary leading-tight tracking-tight mb-6">
+            {post.title}
+          </h1>
+          {post.description && (
+            <p className="text-xl text-text-muted leading-relaxed font-sans mb-8">
+              {post.description}
+            </p>
+          )}
+          
+          <div className="flex items-center space-x-4 border-b border-t border-border-subtle py-4">
+            <div className="w-10 h-10 rounded-full bg-[#191919] flex items-center justify-center font-serif text-white text-lg">
+              A
+            </div>
+            <div>
+              <div className="font-sans text-sm font-medium text-text-primary">Amal Mohamed M</div>
+              <div className="flex items-center space-x-2 text-sm font-sans text-text-muted">
+                <time>{post.date}</time>
+                <span>·</span>
+                <span>{post.readingTime}</span>
+              </div>
+            </div>
+          </div>
+        </header>
 
-      <header className="border-b border-border-subtle pb-8 mb-8">
-        <div className="flex items-center space-x-2 text-xs font-mono text-neutral-400 mb-3">
-          <time>{post.date}</time>
-          <span>·</span>
-          <span>{post.readingTime}</span>
+        {/* Medium Typography Reading Section */}
+        <div className="prose prose-neutral prose-lg lg:prose-xl max-w-none font-serif leading-relaxed">
+          <MDXRemote source={post.content} />
         </div>
-        <h1 className="font-serif text-3xl md:text-5xl font-bold text-white leading-tight">
-          {post.title}
-        </h1>
-        {post.description && (
-          <p className="text-xl text-text-muted mt-4 leading-relaxed font-sans">{post.description}</p>
-        )}
-      </header>
-
-      {/* Medium Typography Reading Section */}
-      <article className="prose prose-invert prose-neutral max-w-none text-base md:text-lg leading-relaxed font-sans">
-        <MDXRemote source={post.content} />
       </article>
     </MotionContainer>
   );

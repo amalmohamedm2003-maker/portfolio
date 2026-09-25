@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation';
 import MotionContainer from '@/components/MotionContainer';
 import Link from 'next/link';
-import { ArrowLeft, Download, ExternalLink } from 'lucide-react';
+import { ArrowLeft } from 'lucide-react';
 
 const PROJECT_REGISTRY: Record<string, any> = {
   'rag-sdk': {
@@ -62,45 +62,44 @@ export default function ProjectDetail({ params }: { params: { slug: string } }) 
 
   return (
     <MotionContainer>
-      <Link href="/" className="inline-flex items-center text-xs font-mono text-text-muted hover:text-white mb-8 transition-colors">
-        <ArrowLeft className="w-3.5 h-3.5 mr-1" /> Back to Overview
+      <Link href="/projects" className="inline-flex items-center text-sm font-sans text-text-muted hover:text-text-primary mb-8 transition-colors">
+        <ArrowLeft className="w-4 h-4 mr-1" /> Back to projects
       </Link>
 
-      <header className="border-b border-border-subtle pb-8 mb-8">
-        <div className="flex items-center space-x-3 text-xs font-mono text-neutral-400 mb-2">
-          <span>{project.date}</span>
-          <span>·</span>
-          <span className="text-medium-green">{project.status}</span>
-        </div>
-        <h1 className="font-serif text-3xl md:text-4xl font-bold text-white mb-4">
+      <header className="pb-8 mb-10">
+        <h1 className="font-serif text-4xl md:text-5xl font-bold text-text-primary mb-4 tracking-tight">
           {project.title}
         </h1>
-        <p className="text-lg text-text-muted leading-relaxed">{project.tagline}</p>
+        <p className="text-xl text-text-muted font-sans leading-relaxed mb-6">{project.tagline}</p>
+        
+        <div className="flex items-center space-x-3 text-sm font-sans text-text-muted mb-8 border-b border-border-subtle pb-8">
+          <span>{project.date}</span>
+          <span>·</span>
+          <span className="text-text-primary font-medium">{project.status}</span>
+        </div>
 
-        <div className="flex items-center space-x-4 mt-6">
+        <div className="flex items-center space-x-4">
           {project.downloadable && (
             <a
               href="/api/download-sdk"
-              className="inline-flex items-center space-x-2 px-4 py-2 rounded-md bg-white text-black text-xs font-medium hover:bg-neutral-200 transition-colors"
+              className="inline-block bg-[#191919] hover:bg-[#000000] text-white px-6 py-2.5 rounded-full text-sm font-medium transition-colors"
             >
-              <Download className="w-4 h-4" />
-              <span>Download SDK Bundle (.zip)</span>
+              Download SDK (.zip)
             </a>
           )}
           <a
             href={project.github}
             target="_blank"
             rel="noreferrer"
-            className="inline-flex items-center space-x-2 px-4 py-2 rounded-md bg-surface border border-border-subtle text-xs text-neutral-300 hover:text-white transition-colors"
+            className="inline-block bg-border-subtle/30 hover:bg-border-subtle text-text-primary px-6 py-2.5 rounded-full text-sm font-medium transition-colors"
           >
-            <ExternalLink className="w-4 h-4" />
-            <span>Inspect GitHub Repository</span>
+            View on GitHub
           </a>
         </div>
       </header>
 
       {/* Render Content */}
-      <article className="prose prose-invert max-w-none font-sans">
+      <article className="prose prose-neutral prose-lg max-w-none font-serif">
         <div dangerouslySetInnerHTML={{ __html: project.content.replace(/\n/g, '<br/>') }} />
       </article>
     </MotionContainer>
