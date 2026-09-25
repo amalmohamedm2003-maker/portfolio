@@ -1,0 +1,27 @@
+---
+title: "Designing a Python RAG SDK: Overcoming Noise and Retrieval Failure"
+date: "2026-03-15"
+description: "Why static chunking fails in production applications, and how our open-source SDK implements Reciprocal Rank Fusion."
+---
+
+Retrieval-Augmented Generation is conceptually simple: parse documents, generate embeddings, and inject the most similar matches into an LLM's system context. 
+
+In production, however, this pattern degrades rapidly.
+
+## 1. The Context Dilution Problem
+
+When retrieving raw document chunks based solely on cosine similarity, two failure modes occur:
+- **Redundant Information:** Multiple chunks repeat identical context, pushing unique edge-case context past the token window.
+- **Semantic Drift:** The query matches keywords in an irrelevant section of documentation.
+
+```python
+# How our SDK solves this via Reciprocal Rank Fusion:
+from rag_engine.retrievers import HybridRetriever
+
+retriever = HybridRetriever(dense_weight=0.7, bm25_weight=0.3)
+ranked_chunks = retriever.fuse_results(query="CVSS base vector calculation", top_k=5)
+```
+
+## 2. Decoupled Vector Storage
+
+Rather than coupling the SDK to a single vector database like Pinecone or Qdrant, we implemented a lightweight abstract base class (`BaseVectorStore`). This enables developers to run an in-memory FAISS or SQLite vector table locally during unit testing with zero external infrastructure.
