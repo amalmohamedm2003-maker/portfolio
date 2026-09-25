@@ -9,7 +9,7 @@ const PROJECT_REGISTRY: Record<string, any> = {
     tagline: 'Production-ready framework for context-grounded LLM synthesis.',
     date: 'Jan 2026 - Apr 2026',
     status: 'Published SDK',
-    github: 'https://github.com/amalmohamedm2003-maker',
+    github: 'https://github.com/amalmohamedm2003-maker/rag_engine_sdk',
     downloadable: true,
     content: `
 ### Background & Problem Statement
@@ -40,7 +40,7 @@ print(response.grounded_text)
     tagline: 'Automating cyber threat scoring using Transformer language models.',
     date: 'Aug 2025 - Jan 2026',
     status: 'Conference Published',
-    github: 'https://github.com/amalmohamedm2003-maker',
+    github: 'https://github.com/amalmohamedm2003-maker/CVSS-BERT-v3',
     downloadable: false,
     content: `
 ### Overview

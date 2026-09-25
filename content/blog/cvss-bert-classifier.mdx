@@ -1,0 +1,62 @@
+---
+title: "CVSS Prediction: BERT Classifier for Evaluating Computer Security Severity of Vulnerability"
+date: "2026-09-25"
+description: "A deep dive into automating CVSS vector generation from textual vulnerability descriptions using Natural Language Processing (NLP) and BERT."
+---
+
+# Abstract
+
+Security vulnerabilities form a significant risk to organizations, which leads to effective prioritization to mitigate potential threats. For assessing the severity of the vulnerability, the Common Vulnerability Scoring System (CVSS) provides a standardized method, but manual scoring is time-consuming and demands expert knowledge. 
+
+This project leverages Natural Language Processing (NLP) and deep learning techniques, specifically a **BERT-based model**, to automate CVSS vector generation from textual vulnerability descriptions. By training multiple classifiers to predict individual CVSS metrics, the system computes severity scores efficiently, aiding in risk prioritization. The proposed approach enhances cybersecurity defenses by providing accurate, scalable, and explainable vulnerability assessments, ultimately improving organizational response times to emerging threats.
+
+---
+
+## 1. Introduction
+
+Computer security vulnerability is a flaw that attackers can exploit that compromises a system's confidentiality, integrity, or availability. Organizations face challenges managing thousands of vulnerabilities that are disclosed annually. It is difficult to address them as limited resources are available. Effective prioritization is necessary for focusing on high-severity vulnerabilities to reduce risks while balancing operational demands. 
+
+CVSS evaluates vulnerabilities based on exploitability and impact; still, assessing and scoring vulnerabilities manually is time-consuming and requires expert knowledge. To handle this, CVSS scoring is automated using Natural Language Processing (NLP). A system based on **BERT (Bidirectional Encoder Representations from Transformers)** is trained to predict CVSS metrics from the textual descriptions in CVE entries.
+
+## 2. Proposed Work
+
+This work proposes an approach to predict software vulnerability severity scores to automate the generation of CVSS vector scores from textual vulnerability descriptions. Multiple BERT classifiers are used for predicting a specific metric of the CVSS vector, such as:
+- Attack Complexity (AC)
+- Attack Vector (AV)
+- User Interaction (UI)
+- Privileges Required (PR)
+- Confidentiality Impact (C)
+- Integrity Impact (I)
+- Availability Impact (A)
+
+By combining the predictions of all classifiers, a complete CVSS vector is generated, from which the severity score can be calculated.
+
+## 3. Dataset & Implementation
+
+A total of **45,676 vulnerability descriptions** from the year 2022-2023 were taken for this purpose from the National Vulnerability Database (NVD). The classification of vulnerabilities based on CVSS v3 Base Severity is as follows:
+- **Medium**: 19,881
+- **High**: 17,506
+- **Critical**: 7,535
+- **Low**: 754
+
+The dataset was split into 20% testing data and 80% training data in a stratified manner to ensure the class distribution in the target variable was preserved.
+
+## 4. Evaluation & Results
+
+The BERT-based model successfully generated accurate vulnerability severity scores. Performance metrics for different vectors showed significant success:
+- **Attack Complexity (AC):** 98% Accuracy, 97.77% F1 Score.
+- **User Interaction (UI):** 95.09% Accuracy, 95.08% F1 Score.
+- **Scope (S):** 97.25% Accuracy, 97.24% F1 Score.
+
+The experiments demonstrated that the classifiers can precisely predict the CVSS vector and severity score, with their results nearly matching those of human experts.
+
+---
+
+## Publication & Credentials
+
+This paper was successfully presented at the **2nd International Conference on Smart & Sustainable Energy Systems (ICSSES 2025)** organized by the Department of Electrical & Electronics Engineering, Vishnu Institute of Technology (Autonomous), Bhimavaram, Andhra Pradesh, India.
+
+*(Note: We have received the official certificate of presentation for this work.)*
+
+> **View the full project and source code on GitHub:**
+> [CVSS-BERT-v3 Repository](https://github.com/amalmohamedm2003-maker/CVSS-BERT-v3)
